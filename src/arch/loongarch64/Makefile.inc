@@ -10,6 +10,11 @@ loongarch64_asm_flags =
 ifeq ($(CONFIG_ARCH_BOOTBLOCK_LOONGARCH64),y)
 
 bootblock-y += bootblock.S
+bootblock-y += lib/fpu/init_fpu.S
+bootblock-y += lib/exception/rom_exception.S
+bootblock-y += lib/exception/init_interrupts.S
+bootblock-y += lib/exception/exception_entry.S
+bootblock-y += lib/exception/exception_handler.c
 bootblock-y += arch_timer.c
 bootblock-y += boot.c
 bootblock-y += \
