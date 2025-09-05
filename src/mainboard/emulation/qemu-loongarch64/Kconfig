@@ -1,0 +1,43 @@
+## SPDX-License-Identifier: GPL-2.0-only
+
+# To execute, do:
+# qemu-system-loongarch -M powernv --cpu power9 --bios 'build/coreboot.rom'
+
+if BOARD_EMULATION_QEMU_LOONGARCH64
+
+config BOARD_SPECIFIC_OPTIONS
+	def_bool y
+	select CPU_LOONGARCH64
+	select BOARD_ROMSIZE_KB_1024
+	select ARCH_BOOTBLOCK_LOONGARCH64
+	select ARCH_VERSTAGE_LOONGARCH64
+	select ARCH_ROMSTAGE_LOONGARCH64
+	select ARCH_RAMSTAGE_LOONGARCH64
+	select BOOT_DEVICE_NOT_SPI_FLASH
+	select MISSING_BOARD_RESET
+
+config MEMLAYOUT_LD_FILE
+	string
+	default "src/mainboard/\$(CONFIG_MAINBOARD_DIR)/memlayout.ld"
+
+config MAINBOARD_DIR
+	string
+	default "emulation/qemu-loongarch64"
+
+config MAINBOARD_PART_NUMBER
+	string
+	default "QEMU LOONGARCH64"
+
+config MAX_CPUS
+	int
+	default 1
+
+config MAINBOARD_VENDOR
+	string
+	default "Emulation"
+
+config DRAM_SIZE_MB
+	int
+	default 32768
+
+endif #  BOARD_EMULATION_QEMU_LOONGARCH64

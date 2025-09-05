@@ -1,0 +1,2 @@
+Board name: QEMU LOONGARCH64
+Category: emulation

@@ -54,17 +54,20 @@ ARCHDIR-x86_32	:= x86
 ARCHDIR-x86_64	:= x86
 ARCHDIR-arm	:= arm
 ARCHDIR-arm64	:= arm64
+ARCHDIR-loongarch64	:= loongarch64
 ARCHDIR-riscv	:= riscv
 ARCHDIR-ppc64	:= ppc64
 
 CFLAGS_arm	+=
-CFLAGS_arm64	+=
+CFLAGS_loongarch64	+=
+CFLAGS_arm64	+= -mgeneral-regs-only
 CFLAGS_riscv	+=
 CFLAGS_x86_32	+=
 CFLAGS_x86_64	+= -mcmodel=large -mno-red-zone
 CFLAGS_ppc64	+=
 
 GCC_ADAFLAGS_arm	+=
+GCC_ADAFLAGS_loongarch64	+=
 GCC_ADAFLAGS_arm64	+= -mgeneral-regs-only
 GCC_ADAFLAGS_riscv	+=
 GCC_ADAFLAGS_x86_32	+=
@@ -87,6 +90,7 @@ GCC_ADAFLAGS_ppc64	+=
 ifeq ($(CONFIG_COMPILER_GCC),y)
 CFLAGS_arm	+= -Wstack-usage=1536
 CFLAGS_arm64	+= -Wstack-usage=1536
+CFLAGS_loongarch64	+= -Wstack-usage=1536
 CFLAGS_riscv	+= -Wstack-usage=1536
 CFLAGS_ppc64	+= -Wstack-usage=1536
 endif

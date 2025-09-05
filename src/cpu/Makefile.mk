@@ -10,6 +10,7 @@ subdirs-y += via
 subdirs-$(CONFIG_ARCH_X86) += x86
 subdirs-$(CONFIG_CPU_QEMU_X86) += qemu-x86
 subdirs-$(CONFIG_CPU_POWER9) += power9
+subdirs-$(CONFIG_CPU_LOONG64) += loongarch64
 
 $(eval $(call create_class_compiler,cpu_microcode,x86_32))
 ################################################################################

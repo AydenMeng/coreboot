@@ -1,0 +1,2 @@
+config BOARD_EMULATION_QEMU_LOONGARCH64
+	bool "QEMU loongarch64"

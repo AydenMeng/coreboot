@@ -255,6 +255,8 @@ detect_special_flags() {
 		;;
 	x64)
 		;;
+	loongarch64)
+		;;
 	arm64)
 		testld "$GCC" "$FLAGS_GCC" "${GCCPREFIX}ld${LINKER_SUFFIX}" \
 		  "$LDFLAGS --fix-cortex-a53-843419" && \
@@ -402,7 +404,7 @@ EOF
 }
 
 # Architecture definitions
-SUPPORTED_ARCHITECTURES="arm arm64 riscv x64 x86 ppc64"
+SUPPORTED_ARCHITECTURES="arm arm64 riscv x64 x86 ppc64 loongarch64"
 
 # TARCH: local name for the architecture
 # (used as CC_${TARCH} in the build system)
@@ -462,6 +464,15 @@ arch_config_ppc64() {
 	TWIDTH="64"
 	TSUPP="ppc64"
 	TABI="linux-gnu" # there is no generic ABI on ppc64
+}
+
+arch_config_loongarch64() {
+	TARCH="loongarch64"
+	TBFDARCHS="loongarch"
+	TCLIST="loongarch64"
+	TWIDTH="64"
+	TSUPP="loongarch64"
+	TABI="linux-gnu"
 }
 
 # Right now, the clang reference toolchain is not building compiler-rt builtins
