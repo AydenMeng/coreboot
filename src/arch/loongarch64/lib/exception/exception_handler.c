@@ -17,15 +17,12 @@
 #include <machine.h>
 #include <loongarch64.h>
 #include <c_quick.h>
-#include <exception.h>
+#include <lib/exception.h>
 
 void CommonExceptionHandler(int)
 {
 
 }
-
-void copy_mem(int)
-{}
 
 /**
   Get Exception Type

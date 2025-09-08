@@ -1,4 +1,3 @@
-void copy_mem(int);
 int GetExceptionType (void);
 
 int GetInterruptType (void);
