@@ -10,6 +10,7 @@ loongarch64_asm_flags =
 ifeq ($(CONFIG_ARCH_BOOTBLOCK_LOONGARCH64),y)
 
 bootblock-y += bootblock.S
+bootblock-y += romstage.c
 bootblock-y += lib/memory/mem_copy.c
 bootblock-y += lib/fpu/init_fpu.S
 bootblock-y += lib/exception/rom_exception.S
