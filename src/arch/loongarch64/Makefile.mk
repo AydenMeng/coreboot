@@ -10,7 +10,6 @@ loongarch64_asm_flags =
 ifeq ($(CONFIG_ARCH_BOOTBLOCK_LOONGARCH64),y)
 
 bootblock-y += bootblock.S
-bootblock-y += romstage.c
 bootblock-y += lib/memory/mem_copy.c
 bootblock-y += lib/fpu/init_fpu.S
 bootblock-y += lib/exception/rom_exception.S
@@ -26,13 +25,10 @@ bootblock-y += \
 	$(top)/src/lib/memmove.c \
 	$(top)/src/lib/memset.c
 
-bootblock-generic-ccopts += $(loongarch64_flags)
+# Build the bootblock
 
-$(objcbfs)/bootblock.debug: $$(bootblock-objs)
-	@printf "    LINK       $(subst $(obj)/,,$(@))\n"
-	$(LD_bootblock) $(LDFLAGS_bootblock) -o $@ -L$(obj) \
-		-T $(call src-to-obj,bootblock,$(CONFIG_MEMLAYOUT_LD_FILE)) --whole-archive --start-group $(filter-out %.ld,$(bootblock-objs)) \
-		$(LIBGCC_FILE_NAME_bootblock) --end-group $(COMPILER_RT_bootblock)
+$(eval $(call link_stage,bootblock))
+$(eval $(call link_stage,decompressor))
 
 endif
 
@@ -43,6 +39,7 @@ ifeq ($(CONFIG_ARCH_ROMSTAGE_LOONGARCH64),y)
 
 romstage-y += arch_timer.c
 romstage-y += boot.c
+romstage-y += romstage.c
 romstage-y += stages.c
 romstage-y += \
 	$(top)/src/lib/memchr.c \
@@ -53,15 +50,14 @@ romstage-y += \
 
 romstage-$(CONFIG_COLLECT_TIMESTAMPS) += timestamp.c
 
-# Build the romstage
+romstage-srcs += $(wildcard $(src)/mainboard/$(MAINBOARDDIR)/romstage.c)
 
-$(objcbfs)/romstage.debug: $$(romstage-objs)
-	@printf "    LINK       $(subst $(obj)/,,$(@))\n"
-	$(LD_romstage) $(LDFLAGS_romstage) -o $@ -L$(obj) -T $(call src-to-obj,romstage,$(CONFIG_MEMLAYOUT_LD_FILE)) --whole-archive --start-group $(filter-out %.ld,$(romstage-objs)) --end-group $(COMPILER_RT_romstage)
+# Build the romstage
 
 romstage-c-ccopts += $(loongarch64_flags)
 romstage-S-ccopts += $(loongarch64_asm_flags)
 
+$(eval $(call link_stage,romstage))
 endif
 
 ################################################################################
@@ -80,19 +76,15 @@ ramstage-y += \
 	$(top)/src/lib/memmove.c \
 	$(top)/src/lib/memset.c
 
-$(eval $(call create_class_compiler,rmodules,power8))
+$(eval $(call create_class_compiler,rmodules,loongarch64))
 
 ramstage-$(CONFIG_COLLECT_TIMESTAMPS) += timestamp.c
 
-ramstage-srcs += src/mainboard/$(MAINBOARDDIR)/mainboard.c
+ramstage-c-ccopts += $(loongarch64_flags)
+ramstage-S-ccopts += $(loongarch64_asm_flags)
 
 # Build the ramstage
 
-$(objcbfs)/ramstage.debug: $$(ramstage-objs)
-	@printf "    CC         $(subst $(obj)/,,$(@))\n"
-	$(LD_ramstage) $(LDFLAGS_ramstage) -o $@ -L$(obj) -T $(call src-to-obj,ramstage,$(CONFIG_MEMLAYOUT_LD_FILE)) --whole-archive --start-group $(filter-out %.ld,$(ramstage-objs)) --end-group $(COMPILER_RT_ramstage)
-
-ramstage-c-ccopts += $(loongarch64_flags)
-ramstage-S-ccopts += $(loongarch64_asm_flags)
+$(eval $(call link_stage,ramstage))
 
 endif

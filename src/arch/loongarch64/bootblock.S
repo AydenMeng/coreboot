@@ -59,7 +59,7 @@ call_entry:
   li.d     $a0, FW_BASE_ADDRESS # fw base
   addi.d   $a1, $sp, 0x8
   //bl       sec_core_startup_with_stack //MXD-TODO: main.c
-  bl       car_stage_entry
+  bl       main
 # end of _module_entry_point
 
 clear_mail_box:
