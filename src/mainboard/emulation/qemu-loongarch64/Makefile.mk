@@ -1,7 +1,8 @@
 ## SPDX-License-Identifier: GPL-2.0-only
 
-bootblock-y += rom_media.c
+bootblock-y += mainboard.c
 bootblock-y += uart.c
+bootblock-y += rom_media.c
 
 romstage-y += cbmem.c
 romstage-y += romstage.c

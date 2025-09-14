@@ -8,7 +8,6 @@
 
 void __noreturn romstage_main(void)
 {
-	console_init();
 	printk(BIOS_DEBUG, "mxd-debug");
 	cbmem_initialize_empty();
 	run_ramstage();
