@@ -1,9 +1,11 @@
+/* SPDX-License-Identifier: GPL-2.0-only */
+/* LoongArch64 timer - uses a loop-based udelay from src/lib/timer.c */
 #include <delay.h>
 #include <timer.h>
 #include <csr.h>
 #include <csr_func.h>
 
-#define CONSTANT_TIMER_FREQ_HZ	100000000ULL
+#define CONSTANT_TIMER_FREQ_HZ  100000000ULL
 static uint64_t timer_last_us;
 
 void init_timer(void) { timer_last_us = 0; }
