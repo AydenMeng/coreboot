@@ -1,5 +1,4 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
-
 #include <cbmem.h>
 #include <romstage.h>
 #include <romstage_common.h>
@@ -8,7 +7,7 @@
 
 void __noreturn romstage_main(void)
 {
-	printk(BIOS_DEBUG, "mxd-debug");
+	printk(BIOS_DEBUG, "romstage loaded & running\n");
 	cbmem_initialize_empty();
 	run_ramstage();
 }

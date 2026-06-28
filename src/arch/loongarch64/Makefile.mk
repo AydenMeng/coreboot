@@ -66,8 +66,6 @@ endif
 ifeq ($(CONFIG_ARCH_RAMSTAGE_LOONGARCH64),y)
 
 ramstage-y += stages.c
-ramstage-y += acpi.c
-ramstage-y += smbios.c
 ramstage-y += arch_timer.c
 ramstage-y += boot.c
 ramstage-y += tables.c
