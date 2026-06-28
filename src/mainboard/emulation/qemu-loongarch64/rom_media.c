@@ -8,14 +8,14 @@
 static ssize_t la_flash_readat(const struct region_device *rdev,
 			       void *b, size_t offset, size_t size)
 {
-	memcpy(b, (void *)(QEMU_VIRT_FLASH + rdev_offset(rdev) + offset), size);
+	memcpy(b, (void *)(QEMU_VIRT_FLASH + region_device_offset(rdev) + offset), size);
 	return (ssize_t)size;
 }
 
 static void *la_flash_mmap(const struct region_device *rdev,
 			   size_t offset, size_t unused)
 {
-	return (void *)(QEMU_VIRT_FLASH + rdev_offset(rdev) + offset);
+	return (void *)(QEMU_VIRT_FLASH + region_device_offset(rdev) + offset);
 }
 
 static int la_flash_munmap(const struct region_device *rdev, void *mapping)
