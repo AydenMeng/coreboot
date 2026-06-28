@@ -5,7 +5,7 @@
 #include <arch/header.ld>
 
 #define QEMU_VIRT_FLASH        0x1c000000
-#define QEMU_BOOTBLOCK_SIZE    (160K)
+#define QEMU_BOOTBLOCK_SIZE    (128K)
 
 SECTIONS
 {
