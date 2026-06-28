@@ -6,12 +6,6 @@
 
 #define QEMU_VIRT_FLASH        0x1c000000
 #define QEMU_BOOTBLOCK_SIZE    (160K)
-/* Leave a small guard window after the bootblock so that the ROM-stage load
- * address stays strictly above the bootblock image once the linker accounts
- * for the bootblock's metadata and alignment requirements.  Without this
- * cushion ld.bfd aborts with "romstage overlaps the previous region" when the
- * bootblock grows close to its 160 KiB budget. */
-#define QEMU_ROM_GUARD         (32K)
 
 SECTIONS
 {
@@ -28,7 +22,8 @@ SECTIONS
 
 	RAMSTAGE(0x00040000, 2M)
 
+        ROMSTAGE(0x00250000, 256K)
+
         BOOTBLOCK(QEMU_VIRT_FLASH, QEMU_BOOTBLOCK_SIZE)
-        ROMSTAGE(QEMU_VIRT_FLASH + QEMU_BOOTBLOCK_SIZE + QEMU_ROM_GUARD, 128K)
 
 }
