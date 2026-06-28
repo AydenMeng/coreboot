@@ -255,11 +255,13 @@
 #define FPU_CSR_RU  0x200   // towards +Infinity
 #define FPU_CSR_RD  0x300   // towards -Infinity
 
-#define DEFAULT_PAGE_SIZE     0x0c
-#define CSR_TLBIDX_SIZE_MASK  0x3f000000
-#define CSR_TLBIDX_PS_SHIFT   24
-#define CSR_TLBIDX_SIZE       CSR_TLBIDX_PS_SHIFT
-#define CSR_TLBREHI_PS_SHIFT  0x0
-#define CSR_TLBREHI_PS        0x3f
 
-#endif
+
+/**
+  Read CSR register.
+
+  @param  Addr  CSR register number.
+
+  @return The value read from the CSR register.
+**/
+#endif /* LOONGARCH_CSR_H_ */
