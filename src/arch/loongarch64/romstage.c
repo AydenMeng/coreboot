@@ -6,7 +6,7 @@
 #include <romstage.h>
 #include <romstage_common.h>
 
-asmlinkage void car_stage_entry(void)
+void main(void)
 {
 	timestamp_add_now(TS_ROMSTAGE_START);
 

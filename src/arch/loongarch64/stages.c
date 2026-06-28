@@ -13,11 +13,7 @@
 #include <cbmem.h>
 #include <arch/stages.h>
 
-/** void main(void) */
-/** { */
-/** } */
-
 void stage_entry(uintptr_t stage_arg)
 {
-	/** main(); */
+	main();
 }

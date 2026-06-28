@@ -4,7 +4,7 @@
 #include <mainboard/addressmap.h>
 
 static const struct mem_region_device boot_dev =
-	MEM_REGION_DEV_RO_INIT(QEMU_VIRT_FLASH, CONFIG_ROM_SIZE);
+	MEM_REGION_DEV_RO_INIT(QEMU_VIRT_FLASH, 0x400000);
 
 const struct region_device *boot_device_ro(void)
 {
